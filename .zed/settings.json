@@ -1,17 +1,151 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
+  // =========================
+  // Language-Specific Settings
+  // =========================
   "languages": {
+    // TypeScript (for Angular)
     "TypeScript": {
-      "language_servers": ["angular", "..."]
+      "language_servers": ["angular", "typescript-language-server"],
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "auto"
     },
+
+    // JavaScript
+    "JavaScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "auto"
+    },
+
+    // HTML (Angular templates)
     "HTML": {
-      "language_servers": ["angular", "..."]
+      "language_servers": ["angular", "html", "emmet", "..."],
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+
+    // CSS/SCSS
+    "CSS": {
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "auto"
     }
+  },
+
+  // =========================
+  // LSP (Language Server Protocol)
+  // =========================
+  "lsp": {
+    "vscode-html-language-server": {
+      "settings": {
+        "html": {
+          "format": {
+            // Indent under <html> and <head> (default: false)
+            "indentInnerHtml": true,
+            // Disable formatting inside <svg> or <script>
+            "contentUnformatted": "svg,script",
+            // Add an extra newline before <div> and <p>
+            "extraLiners": "div,p"
+          }
+        }
+      }
+    },
+    // TypeScript/Angular Language Server
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": true,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true,
+          "disableAutomaticTypingAcquisition": false
+        },
+        "tsserver": {
+          "useSyntaxServer": "auto"
+        }
+      }
+    },
+
+    // Angular Language Server
+    "angular": {
+      "initialization_options": {
+        "angularOnly": false,
+        "angular_language_server_version": "21.0",
+        "typescript_version": "5.4"
+      }
+    },
+
+    // Tailwind CSS Language Server
+    "tailwindcss-language-server": {
+      "settings": {
+        "tailwindCSS": {
+          "experimental": {
+            "classRegex": [
+              ["class:\\s*?[\"'`]([^\"'`]*).*?[\"'`]", "[\"'`]([^\"'`]*).*?[\"'`]"],
+              ["classList.(?:add|remove)\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+            ]
+          },
+          "includeLanguages": {
+            "typescript": "html",
+            "javascript": "html",
+            "typescriptreact": "html"
+          },
+          "validate": true,
+          "colorDecorators": true,
+          "suggestions": true,
+          "lint": {
+            "cssConflict": "warning",
+            "invalidApply": "error",
+            "invalidConfigPath": "error",
+            "invalidScreen": "error",
+            "invalidTailwindDirective": "error",
+            "invalidVariant": "error",
+            "recommendedVariantOrder": "warning"
+          }
+        }
+      }
+    }
+  },
+
+  // =========================
+  // File Associations
+  // =========================
+  "file_types": {
+    "TypeScript": ["ts"],
+    "HTML": ["html", "component.html"]
+  },
+
+  // =========================
+  // Prettier Settings (for Angular/TypeScript)
+  // =========================
+  "prettier": {
+    "enabled": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+
+  // =========================
+  // Privacy & Telemetry
+  // =========================
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
   }
 }
